@@ -12,6 +12,7 @@ namespace EiyudenChronicle
 	{
 		private static Info mThis = new Info();
 		public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Character { get; private set; } = new List<NameValueInfo>();
 
 		private Info() { }
 
@@ -28,6 +29,7 @@ namespace EiyudenChronicle
 		private void Initialize()
 		{
 			AppendList("info\\item.txt", Item);
+			AppendList("info\\chara.txt", Character);
 		}
 
 		public NameValueInfo? Search<Type>(List<Type> list, uint id)

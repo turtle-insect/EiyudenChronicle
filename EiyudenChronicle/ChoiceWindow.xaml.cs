@@ -22,6 +22,7 @@ namespace EiyudenChronicle
 		public enum eType
 		{
 			eItem,
+			eCharacter,
 		};
 
 		public uint ID { get; set; }
@@ -68,6 +69,7 @@ namespace EiyudenChronicle
 		{
 			ListBoxItem.Items.Clear();
 			List<NameValueInfo> items = Info.Instance().Item;
+			if(Type == eType.eCharacter) items = Info.Instance().Character;
 
 			foreach (var item in items)
 			{

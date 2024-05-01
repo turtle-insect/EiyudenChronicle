@@ -12,6 +12,7 @@
 	</Window.DataContext>
 	<Window.Resources>
 		<local:ItemIDConverter x:Key="ItemIDConverter"/>
+		<local:CharaIDConverter x:Key="CharaIDConverter"/>
 	</Window.Resources>
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
@@ -53,6 +54,40 @@
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
+			</TabItem>
+			<TabItem Header="Charater">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<ListBox x:Name="ListBoxCharacter" ItemsSource="{Binding Characters}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Label Content="{Binding ID, Converter={StaticResource CharaIDConverter}}"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition Height="10*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<Label Content="ID"/>
+						<StackPanel Grid.Column="1" Orientation="Horizontal">
+							<Button Content=" ... " Command="{Binding ChoiceCharacterCommand}" CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
+							<Label Content="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.ID, Converter={StaticResource CharaIDConverter}}"/>
+						</StackPanel>
+						<Label Grid.Row="1" Content="Exp"/>
+						<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+					</Grid>
+				</Grid>
 			</TabItem>
 		</TabControl>
 	</DockPanel>
